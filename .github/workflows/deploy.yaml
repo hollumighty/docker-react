@@ -9,18 +9,6 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
-      - run: docker build -t hollumighty/frontreal -f ./client/Dockerfile.dev ./client
-      - run: docker run -e CI=true hollumighty/frontreal npm test
- 
-      - run: docker build -t hollumighty/multi-client-10-14 ./client
-      - run: docker build -t hollumighty/multi-nginx-10-14 ./nginx
-      - run: docker build -t hollumighty/multi-server-10-14 ./server
-      - run: docker build -t hollumighty/multi-worker-10-14 ./worker
- 
-      - run: docker push hollumighty/multi-client-10-14
-      - run: docker push hollumighty/multi-nginx-10-14
-      - run: docker push hollumighty/multi-server-10-14
-      - run: docker push hollumighty/multi-worker-10-14
  
       - name: Generate deployment package
         run: zip -r deploy.zip . -x '*.git*'
